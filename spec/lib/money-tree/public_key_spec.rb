@@ -40,7 +40,7 @@ describe MoneyTree::PublicKey do
       end
     
       it "is a valid bitcoin address" do
-        expect(@key.uncompressed.to_address).to eql('133bJA2xoVqBUsiR3uSkciMo5r15fLAaZg'      )
+        expect(@key.uncompressed.to_address).to eql('133bJA2xoVqBUsiR3uSkciMo5r15fLAaZg')
       end
     end
   
@@ -50,7 +50,17 @@ describe MoneyTree::PublicKey do
       end
     
       it "is a valid compressed bitcoin address" do
-        expect(@key.to_address).to eql('13uVqa35BMo4mYq9LiZrXVzoz9EFZ6aoXe'      )
+        expect(@key.to_address).to eql('13uVqa35BMo4mYq9LiZrXVzoz9EFZ6aoXe')
+      end
+    end
+    
+    describe "to_p2wpkh_p2sh" do
+      it "has 34 characters" do
+        expect(@key.to_p2wpkh_p2sh.length).to eql(34)
+      end
+    
+      it "is a valid p2wpkh_p2sh bitcoin address" do
+        expect(@key.to_p2wpkh_p2sh).to eql('31vNN7WVDxjvc5XZVKW3qV4B3nFLxsRPnE')
       end
     end
   end
@@ -76,7 +86,7 @@ describe MoneyTree::PublicKey do
       end
   
       it "is a valid compressed hex" do
-        expect(@key.compressed.to_hex).to eql('022dfc2557a007c93092c2915f11e8aa70c4f399a6753e2e908330014091580e4b'      )
+        expect(@key.compressed.to_hex).to eql('022dfc2557a007c93092c2915f11e8aa70c4f399a6753e2e908330014091580e4b')
       end
     end
   
@@ -92,7 +102,7 @@ describe MoneyTree::PublicKey do
       end
     
       it "is a valid bitcoin address" do
-        expect(@key.uncompressed.to_address).to eql('133bJA2xoVqBUsiR3uSkciMo5r15fLAaZg'      )
+        expect(@key.uncompressed.to_address).to eql('133bJA2xoVqBUsiR3uSkciMo5r15fLAaZg')
       end
     end
   
@@ -102,7 +112,17 @@ describe MoneyTree::PublicKey do
       end
     
       it "is a valid compressed bitcoin address" do
-        expect(@key.compressed.to_address).to eql('13uVqa35BMo4mYq9LiZrXVzoz9EFZ6aoXe'      )
+        expect(@key.compressed.to_address).to eql('13uVqa35BMo4mYq9LiZrXVzoz9EFZ6aoXe')
+      end
+    end
+    
+    describe "to_p2wpkh_p2sh" do
+      it "has 34 characters" do
+        expect(@key.to_p2wpkh_p2sh.length).to eql(34)
+      end
+    
+      it "is a valid p2wpkh_p2sh bitcoin address" do
+        expect(@key.to_p2wpkh_p2sh).to eql('3JUBTtepUbTZgUtjbde7UANs5cey8N57xa')
       end
     end
     

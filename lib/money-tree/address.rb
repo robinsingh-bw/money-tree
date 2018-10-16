@@ -11,6 +11,10 @@ module MoneyTree
     def to_s(network: :bitcoin)
       public_key.to_s(network: network)
     end
+    
+    def to_p2wpkh_p2sh(network: :bitcoin)
+      public_key.to_p2wpkh_p2sh(network: network)
+    end
 
   end
 end

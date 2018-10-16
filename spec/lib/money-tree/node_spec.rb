@@ -93,6 +93,7 @@ describe MoneyTree::Master do
             expect(@master.to_identifier).to eql("3442193e1bb70916e914552172cd4e2dbc9df811")
             expect(@master.to_fingerprint).to eql("3442193e")
             expect(@master.to_address).to eql("15mKKb2eos1hWa6tisdPwwDC1a5J1y9nma")
+            expect(@master.to_p2wpkh_p2sh).to eql("3PpgpssV7mcAGpZRWiCWhodUTnjpoSZg7a")
           end
 
           it "generates a secret key" do
@@ -140,6 +141,7 @@ describe MoneyTree::Master do
             expect(@node.to_identifier).to eql("5c1bd648ed23aa5fd50ba52b2457c11e9e80a6a7")
             expect(@node.to_fingerprint).to eql("5c1bd648")
             expect(@node.to_address).to eql("19Q2WoS5hSS6T8GjhK8KZLMgmWaq4neXrh")
+            expect(@node.to_p2wpkh_p2sh).to eql("3AbBmNbPDSzeZKHywDrH3h5v2rL8xGfT7e")
           end
 
           it "generates a private key" do
@@ -187,6 +189,7 @@ describe MoneyTree::Master do
             expect(@node.to_identifier).to eql("5c1bd648ed23aa5fd50ba52b2457c11e9e80a6a7")
             expect(@node.to_fingerprint).to eql("5c1bd648")
             expect(@node.to_address).to eql("19Q2WoS5hSS6T8GjhK8KZLMgmWaq4neXrh")
+            expect(@node.to_p2wpkh_p2sh).to eql("3AbBmNbPDSzeZKHywDrH3h5v2rL8xGfT7e")
           end
 
           it "does not generate a private key" do
@@ -232,6 +235,7 @@ describe MoneyTree::Master do
             expect(@node.to_identifier).to eql("bef5a2f9a56a94aab12459f72ad9cf8cf19c7bbe")
             expect(@node.to_fingerprint).to eql("bef5a2f9")
             expect(@node.to_address).to eql("1JQheacLPdM5ySCkrZkV66G2ApAXe1mqLj")
+            expect(@node.to_p2wpkh_p2sh).to eql("3DymAvEWH38HuzHZ3VwLus673bNZnYwNXu")
           end
 
           it "generates a private key" do
@@ -279,6 +283,7 @@ describe MoneyTree::Master do
             expect(@node.to_identifier).to eql("bef5a2f9a56a94aab12459f72ad9cf8cf19c7bbe")
             expect(@node.to_fingerprint).to eql("bef5a2f9")
             expect(@node.to_address).to eql("1JQheacLPdM5ySCkrZkV66G2ApAXe1mqLj")
+            expect(@node.to_p2wpkh_p2sh).to eql("3DymAvEWH38HuzHZ3VwLus673bNZnYwNXu")
           end
 
           it "does not generate a private key" do
@@ -324,6 +329,7 @@ describe MoneyTree::Master do
             expect(@node.to_identifier).to eql("d880d7d893848509a62d8fb74e32148dac68412f")
             expect(@node.to_fingerprint).to eql("d880d7d8")
             expect(@node.to_address).to eql("1LjmJcdPnDHhNTUgrWyhLGnRDKxQjoxAgt")
+            expect(@node.to_p2wpkh_p2sh).to eql("3PxPuCJMQGgkPYArciuUFakdiKC58j3Df6")
           end
 
           it "generates a private key" do
@@ -371,6 +377,7 @@ describe MoneyTree::Master do
             expect(@node.to_identifier).to eql("d69aa102255fed74378278c7812701ea641fdf32")
             expect(@node.to_fingerprint).to eql("d69aa102")
             expect(@node.to_address).to eql("1LZiqrop2HGR4qrH1ULZPyBpU6AUP49Uam")
+            expect(@node.to_p2wpkh_p2sh).to eql("3BuqWierKkrD7XEeJL4hucMGqVCe5G4WK7")
           end
 
           it "generates a private key" do
@@ -422,10 +429,12 @@ describe MoneyTree::Master do
             expect(@master.to_identifier).to eql("bd16bee53961a47d6ad888e29545434a89bdfe95")
             expect(@master.to_fingerprint).to eql("bd16bee5")
             expect(@master.to_address).to eql("1JEoxevbLLG8cVqeoGKQiAwoWbNYSUyYjg")
+            expect(@master.to_p2wpkh_p2sh).to eql("3QaGQQTfBvSxXnsggeGxF3zfTAo3uyeREG")
           end
 
           it "generates compressed and uncompressed addresses" do
             expect(@master.to_address).to eql("1JEoxevbLLG8cVqeoGKQiAwoWbNYSUyYjg")
+            expect(@master.to_p2wpkh_p2sh).to eql("3QaGQQTfBvSxXnsggeGxF3zfTAo3uyeREG")
             expect(@master.to_address(true)).to eql("1JEoxevbLLG8cVqeoGKQiAwoWbNYSUyYjg")
             expect(@master.to_address(false)).to eql("1AEg9dFEw29kMgaN4BNHALu7AzX5XUfzSU")
           end
@@ -476,6 +485,7 @@ describe MoneyTree::Master do
             expect(@node.to_identifier).to eql("5a61ff8eb7aaca3010db97ebda76121610b78096")
             expect(@node.to_fingerprint).to eql("5a61ff8e")
             expect(@node.to_address).to eql("19EuDJdgfRkwCmRzbzVBHZWQG9QNWhftbZ")
+            expect(@node.to_p2wpkh_p2sh).to eql("39cFMGtVaEw6AfksMcaLpu8frZxmqngh8c")
           end
 
           it "generates a private key" do
@@ -524,6 +534,7 @@ describe MoneyTree::Master do
             expect(@node.to_identifier).to eql("5a61ff8eb7aaca3010db97ebda76121610b78096")
             expect(@node.to_fingerprint).to eql("5a61ff8e")
             expect(@node.to_address).to eql("19EuDJdgfRkwCmRzbzVBHZWQG9QNWhftbZ")
+            expect(@node.to_p2wpkh_p2sh).to eql("39cFMGtVaEw6AfksMcaLpu8frZxmqngh8c")
           end
 
           it "does not generate a private key" do
@@ -570,6 +581,7 @@ describe MoneyTree::Master do
             expect(@node.to_identifier).to eql("d8ab493736da02f11ed682f88339e720fb0379d1")
             expect(@node.to_fingerprint).to eql("d8ab4937")
             expect(@node.to_address).to eql("1Lke9bXGhn5VPrBuXgN12uGUphrttUErmk")
+            expect(@node.to_p2wpkh_p2sh).to eql("39oYp2KWMueN9LSVyDGUGAeDeAgdj43suV")
           end
 
           it "generates a private key" do
@@ -617,6 +629,7 @@ describe MoneyTree::Master do
             expect(@node.to_identifier).to eql("78412e3a2296a40de124307b6485bd19833e2e34")
             expect(@node.to_fingerprint).to eql("78412e3a")
             expect(@node.to_address).to eql("1BxrAr2pHpeBheusmd6fHDP2tSLAUa3qsW")
+            expect(@node.to_p2wpkh_p2sh).to eql("3McFiyStLZ4GzqN9Hx7rG7iyVjaX5Hf7VH")
           end
 
           it "generates a private key" do
@@ -664,6 +677,7 @@ describe MoneyTree::Master do
             expect(@node.to_identifier).to eql("31a507b815593dfc51ffc7245ae7e5aee304246e")
             expect(@node.to_fingerprint).to eql("31a507b8")
             expect(@node.to_address).to eql("15XVotxCAV7sRx1PSCkQNsGw3W9jT9A94R")
+            expect(@node.to_p2wpkh_p2sh).to eql("35aip4nbX3wM2V3NMxHgPz1wEUQ2T7BJPY")
           end
 
           it "generates a private key" do
@@ -711,6 +725,7 @@ describe MoneyTree::Master do
             expect(@node.to_identifier).to eql("26132fdbe7bf89cbc64cf8dafa3f9f88b8666220")
             expect(@node.to_fingerprint).to eql("26132fdb")
             expect(@node.to_address).to eql("14UKfRV9ZPUp6ZC9PLhqbRtxdihW9em3xt")
+            expect(@node.to_p2wpkh_p2sh).to eql("3NUwiFMvp3CN1MYXkUjkoboYk7mHuQTTUn")
           end
 
           it "generates a private key" do

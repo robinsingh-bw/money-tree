@@ -19,6 +19,8 @@ describe MoneyTree::Address do
       expect(address.to_s).to eql("13uVqa35BMo4mYq9LiZrXVzoz9EFZ6aoXe")
       expect(address.private_key.to_s).to eql("KzPkwAXJ4wtXHnbamTaJqoMrzwCUUJaqhUxnqYhnZvZH6KhgmDPK")
       expect(address.public_key.to_s).to eql("13uVqa35BMo4mYq9LiZrXVzoz9EFZ6aoXe")
+      expect(address.to_p2wpkh_p2sh).to eql("31vNN7WVDxjvc5XZVKW3qV4B3nFLxsRPnE")
+      expect(address.public_key.to_p2wpkh_p2sh).to eql("31vNN7WVDxjvc5XZVKW3qV4B3nFLxsRPnE")
     end
     
     it "imports a private key in compressed wif format" do
@@ -26,6 +28,7 @@ describe MoneyTree::Address do
       expect(address.private_key.key).to eql("5eae5375fb5f7a0ea650566363befa2830ef441bdcb19198adf318faee86d64b")
       expect(address.public_key.key).to eql("022dfc2557a007c93092c2915f11e8aa70c4f399a6753e2e908330014091580e4b")
       expect(address.to_s).to eql("13uVqa35BMo4mYq9LiZrXVzoz9EFZ6aoXe")
+      expect(address.to_p2wpkh_p2sh).to eql("31vNN7WVDxjvc5XZVKW3qV4B3nFLxsRPnE")
     end
     
     it "imports a private key in uncompressed wif format" do
@@ -43,6 +46,8 @@ describe MoneyTree::Address do
     it "returns compressed base58 public key" do
       expect(@address.to_s).to eql("13uVqa35BMo4mYq9LiZrXVzoz9EFZ6aoXe")
       expect(@address.public_key.to_s).to eql("13uVqa35BMo4mYq9LiZrXVzoz9EFZ6aoXe")
+      expect(@address.to_p2wpkh_p2sh).to eql("31vNN7WVDxjvc5XZVKW3qV4B3nFLxsRPnE")
+      expect(@address.public_key.to_p2wpkh_p2sh).to eql("31vNN7WVDxjvc5XZVKW3qV4B3nFLxsRPnE")
     end
     
     it "returns compressed WIF private key" do

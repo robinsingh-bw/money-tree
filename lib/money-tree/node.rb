@@ -146,6 +146,10 @@ module MoneyTree
       address = NETWORKS[network][:address_version] + to_identifier(compressed)
       to_serialized_base58 address
     end
+    
+    def to_p2wpkh_p2sh(network: :bitcoin)
+      public_key.to_p2wpkh_p2sh(network: network)
+    end
 
     def subnode(i = 0, opts = {})
       if private_key.nil?
