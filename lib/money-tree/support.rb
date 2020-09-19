@@ -1,5 +1,6 @@
 require 'openssl'
 require 'base64'
+require 'blake'
 
 module MoneyTree
   module Support
@@ -9,44 +10,46 @@ module MoneyTree
     INT64_MAX = 256 ** [1].pack("Q*").size
     BASE58_CHARS = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
     
-    def int_to_base58(int_val, leading_zero_bytes=0)
-      base58_val, base = '', BASE58_CHARS.size
+    def int_to_base58(int_val, base58_dictionary = nil)
+      base58_dictionary ||= BASE58_CHARS
+      base58_val, base = '', base58_dictionary.size
       while int_val > 0
         int_val, remainder = int_val.divmod(base)
-        base58_val = BASE58_CHARS[remainder] + base58_val
+        base58_val = base58_dictionary[remainder] + base58_val
       end
       base58_val
     end
 
-    def base58_to_int(base58_val)
-      int_val, base = 0, BASE58_CHARS.size
+    def base58_to_int(base58_val, base58_dictionary = nil)
+      base58_dictionary ||= BASE58_CHARS
+      int_val, base = 0, base58_dictionary.size
       base58_val.reverse.each_char.with_index do |char,index|
-        raise ArgumentError, 'Value not a valid Base58 String.' unless char_index = BASE58_CHARS.index(char)
+        raise ArgumentError, 'Value not a valid Base58 String.' unless char_index = base58_dictionary.index(char)
         int_val += char_index*(base**index)
       end
       int_val
     end
 
-    def encode_base58(hex)
+    def encode_base58(hex, base58_dictionary = nil)
       leading_zero_bytes  = (hex.match(/^([0]+)/) ? $1 : '').size / 2
-      ("1"*leading_zero_bytes) + int_to_base58( hex.to_i(16) )
+      ((base58_dictionary || BASE58_CHARS)[0]*leading_zero_bytes) + int_to_base58(hex.to_i(16), base58_dictionary)
     end
 
-    def decode_base58(base58_val)
-      s = base58_to_int(base58_val).to_s(16); s = (s.bytesize.odd? ? '0'+s : s)
+    def decode_base58(base58_val, base58_dictionary = nil)
+      s = base58_to_int(base58_val, base58_dictionary).to_s(16); s = (s.bytesize.odd? ? '0'+s : s)
       s = '' if s == '00'
       leading_zero_bytes = (base58_val.match(/^([1]+)/) ? $1 : '').size
       s = ("00"*leading_zero_bytes) + s  if leading_zero_bytes > 0
       s
     end
     alias_method :base58_to_hex, :decode_base58
-    
-    def to_serialized_base58(hex)
-      hash = sha256 hex
-      hash = sha256 hash
+
+    def to_serialized_base58(hex, algorithm = "sha256", base58_dictionary = nil)
+      hash = send(algorithm, hex)
+      hash = send(algorithm, hash)
       checksum = hash.slice(0..7)
       address = hex + checksum
-      encode_base58 address
+      encode_base58 address, base58_dictionary
     end
     
     def from_serialized_base58(base58)
@@ -61,9 +64,14 @@ module MoneyTree
       source = [source].pack("H*") unless opts[:ascii]
       bytes_to_hex Digest.digest(digest_type, source)
     end
-    
+
     def sha256(source, opts = {})
       digestify('SHA256', source, opts)
+    end
+
+    def blake256(source, opts = {})
+      source = [source].pack("H*")
+      bytes_to_hex Blake.digest(source, 256)
     end
     
     def ripemd160(source, opts = {})

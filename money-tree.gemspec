@@ -25,10 +25,10 @@ Gem::Specification.new do |spec|
   if ($0 =~ /gem\z/) and not ENV.include?("SKIP_GEM_SIGNING")
     spec.signing_key = File.join(Gem.user_home, ".ssh", "gem-private_key.pem")
   end
-
  
   spec.add_dependency "ffi"
-    
+  spec.add_dependency "blake"
+
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"

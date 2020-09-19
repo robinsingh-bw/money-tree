@@ -143,8 +143,8 @@ module MoneyTree
     end
 
     def to_address(compressed=true, network: :bitcoin)
-      address = NETWORKS[network][:address_version] + to_identifier(compressed)
-      to_serialized_base58 address
+      key = compressed ? public_key.compressed : public_key.uncompressed
+      key.to_address(network: network)
     end
     
     def to_p2wpkh_p2sh(network: :bitcoin)

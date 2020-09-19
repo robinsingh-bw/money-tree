@@ -241,15 +241,16 @@ module MoneyTree
       point.to_bn.to_i
     end
 
-    def to_ripemd160
-      hash = sha256 to_hex
+    def to_ripemd160(algorithm = "sha256")
+      hash = send(algorithm, to_hex)
       ripemd160 hash
     end
 
     def to_address(network: :bitcoin)
-      hash = to_ripemd160
+      algorithm = NETWORKS[network][:algorithm] || "sha256"
+      hash = to_ripemd160(algorithm)
       address = NETWORKS[network][:address_version] + hash
-      to_serialized_base58 address
+      to_serialized_base58(address, algorithm, NETWORKS[network][:base58_dictionary])
     end
     alias :to_s :to_address
     
